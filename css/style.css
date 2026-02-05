@@ -92,11 +92,11 @@ h2,
   position: absolute;
   top: 100%;
   left: 0;
-  min-width: 240px;
+  min-width: 270px;
   background: white;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   border-radius: 12px;
-  padding: 10px 0;
+  /* padding: 10px 0; */
   z-index: 100;
 }
 
@@ -142,6 +142,8 @@ h2,
 .slider-track:hover {
   animation-play-state: paused; /* Mouse le jane par ruk jayega */
 }
+.hero-section {
+}
 
 .logo-item {
   width: 250px;
@@ -150,7 +152,7 @@ h2,
   align-items: center;
   flex-shrink: 0;
 }
-.navbar li a{
-    font-size: 16px;
-    font-family: sans-serif !important;
+.navbar li a {
+  font-size: 16px;
+  font-family: sans-serif !important;
 }
