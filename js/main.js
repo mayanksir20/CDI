@@ -31,6 +31,54 @@ servicesBtn.onclick = () => {
 
 // Navbar & Mobile Menu Logic end
 
+
+document.addEventListener("DOMContentLoaded", function() {
+    const currentUrl = window.location.pathname.split("/").pop() || "index.html";
+
+    // --- Desktop Logic ---
+    const navLinks = document.querySelectorAll(".nav-link");
+    const dropdownItems = document.querySelectorAll(".dropdown-item");
+    const servicesParent = document.getElementById("services-parent");
+
+    navLinks.forEach(link => {
+        if (link.getAttribute("href") === currentUrl) {
+            link.classList.add("active-page");
+        }
+    });
+
+    dropdownItems.forEach(item => {
+        if (item.getAttribute("href") === currentUrl) {
+            item.classList.add("active-item");
+            if (servicesParent) servicesParent.classList.add("active-parent");
+        }
+    });
+
+    // --- Mobile Logic ---
+    const mobLinks = document.querySelectorAll(".mob-link");
+    const mobChildren = document.querySelectorAll(".mob-child");
+    const mobServicesBtn = document.getElementById("mobile-services-btn");
+    const mobServicesList = document.getElementById("mobile-services-list");
+
+    mobLinks.forEach(link => {
+        if (link.getAttribute("href") === currentUrl) {
+            link.classList.add("active-mob");
+        }
+    });
+
+    mobChildren.forEach(child => {
+        if (child.getAttribute("href") === currentUrl) {
+            child.classList.add("active-mob-child");
+            // Automatically open the mobile dropdown if child is active
+            if (mobServicesBtn && mobServicesList) {
+                mobServicesBtn.classList.add("mob-parent-active");
+                mobServicesList.classList.remove("hidden");
+                mobServicesList.classList.add("flex");
+                mobServicesBtn.querySelector('i').style.transform = "rotate(180deg)";
+            }
+        }
+    });
+});
+
 // --- Slider banner Logic ---
 const slides = document.querySelectorAll('.hero-slide');
 let current = 0;

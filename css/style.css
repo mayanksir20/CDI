@@ -106,9 +106,15 @@ h2,
 }
 
 /* menu section css */
-.mobile-menu-active {
-  transform: translateX(0) !important;
-}
+/* Desktop Active Classes */
+    .nav-link.active-page { color: #00a859 !important; border-bottom: 2px solid #00a859; }
+    .nav-link.active-parent { color: #3e4095 !important; border-bottom: 2px solid #3e4095; }
+    .dropdown-item.active-item { background-color: #f0f9ff; color: #00afef !important; border-left: 4px solid #3e4095; }
+
+    /* Mobile Active Classes */
+    .mob-link.active-mob { background-color: #f0fff4; color: #00a859 !important; }
+    .mob-parent-active { color: #3e4095 !important; background-color: #f9fafb; }
+    .mob-child.active-mob-child { border-left-color: #00afef !important; color: #00afef !important; font-weight: 700; }
 #mobile-services-list.flex {
   animation: fadeIn 0.3s ease-in-out;
 }
