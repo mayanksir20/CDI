@@ -1,95 +1,102 @@
 document.addEventListener("DOMContentLoaded", function () {
-    console.log("DOM Fully Loaded");
-
     // --- 1. Navbar & Mobile Menu Logic ---
     const menu = document.getElementById('mobile-menu');
     const overlay = document.getElementById('mobile-overlay');
     const menuOpenBtn = document.getElementById('menu-open');
     const menuCloseBtn = document.getElementById('menu-close');
-    const mobServicesBtn = document.getElementById('mobile-services-btn');
-    const mobServicesList = document.getElementById('mobile-services-list');
+    const servicesBtn = document.getElementById('mobile-services-btn');
+    const servicesList = document.getElementById('mobile-services-list');
 
     if (menuOpenBtn && menu && overlay) {
         menuOpenBtn.onclick = () => {
-            menu.classList.remove('translate-x-full'); // Tailwind standard way
             menu.classList.add('mobile-menu-active');
             overlay.classList.remove('hidden');
         };
-    }
 
-    const closeMenu = () => {
-        if (menu && overlay) {
-            menu.classList.add('translate-x-full');
+        const closeMenu = () => {
             menu.classList.remove('mobile-menu-active');
             overlay.classList.add('hidden');
-        }
-    };
+        };
 
-    if (menuCloseBtn) menuCloseBtn.onclick = closeMenu;
-    if (overlay) overlay.onclick = closeMenu;
+        if (menuCloseBtn) menuCloseBtn.onclick = closeMenu;
+        overlay.onclick = closeMenu;
+    }
 
-    // Mobile Dropdown Toggle (Services)
-    if (mobServicesBtn && mobServicesList) {
-        mobServicesBtn.onclick = (e) => {
-            e.preventDefault();
-            const icon = mobServicesBtn.querySelector('i');
-            mobServicesList.classList.toggle('hidden');
-            mobServicesList.classList.toggle('flex');
+    if (servicesBtn && servicesList) {
+        servicesBtn.onclick = () => {
+            const icon = servicesBtn.querySelector('i');
+            servicesList.classList.toggle('hidden');
+            servicesList.classList.toggle('flex');
             if (icon) icon.classList.toggle('rotate-180');
         };
     }
 
     // --- 2. Active Link Logic (Local & Live Fix) ---
     let currentPath = window.location.pathname;
-    let currentUrl = currentPath.split("/").pop() || "index.html";
-    if (currentUrl === "/") currentUrl = "index.html";
+    let currentUrl = currentPath.split("/").pop();
+    if (currentUrl === "" || currentUrl === "/") {
+        currentUrl = "index.html";
+    }
 
-    // Desktop Active
-    document.querySelectorAll(".nav-link").forEach(link => {
-        const href = link.getAttribute("href");
-        if (href === currentUrl) link.classList.add("active-page");
-    });
+    // Desktop
+    const navLinks = document.querySelectorAll(".nav-link");
+    const dropdownItems = document.querySelectorAll(".dropdown-item");
+    const servicesParent = document.getElementById("services-parent");
 
-    // Dropdown Active
-    document.querySelectorAll(".dropdown-item").forEach(item => {
-        if (item.getAttribute("href") === currentUrl) {
-            item.classList.add("active-item");
-            const parent = document.getElementById("services-parent");
-            if (parent) parent.classList.add("active-parent");
+    navLinks.forEach(link => {
+        if (link.getAttribute("href") === currentUrl) {
+            link.classList.add("active-page");
         }
     });
 
-    // Mobile Active
-    document.querySelectorAll(".mob-link").forEach(link => {
-        if (link.getAttribute("href") === currentUrl) link.classList.add("active-mob");
+    dropdownItems.forEach(item => {
+        if (item.getAttribute("href") === currentUrl) {
+            item.classList.add("active-item");
+            if (servicesParent) servicesParent.classList.add("active-parent");
+        }
     });
 
-    document.querySelectorAll(".mob-child").forEach(child => {
+    // Mobile
+    const mobLinks = document.querySelectorAll(".mob-link");
+    const mobChildren = document.querySelectorAll(".mob-child");
+
+    mobLinks.forEach(link => {
+        if (link.getAttribute("href") === currentUrl) {
+            link.classList.add("active-mob");
+        }
+    });
+
+    mobChildren.forEach(child => {
         if (child.getAttribute("href") === currentUrl) {
             child.classList.add("active-mob-child");
-            if (mobServicesList) {
-                mobServicesList.classList.remove('hidden');
-                mobServicesList.classList.add('flex');
-                if (mobServicesBtn) {
-                    mobServicesBtn.classList.add("mob-parent-active");
-                    const icon = mobServicesBtn.querySelector('i');
-                    if (icon) icon.classList.add('rotate-180');
-                }
+            if (servicesBtn && servicesList) {
+                servicesBtn.classList.add("mob-parent-active");
+                servicesList.classList.remove("hidden");
+                servicesList.classList.add("flex");
+                const icon = servicesBtn.querySelector('i');
+                if (icon) icon.classList.add('rotate-180');
             }
         }
     });
 
-    // --- 3. Slider Banner Logic ---
+    // --- 3. Slider banner Logic ---
     const slides = document.querySelectorAll('.hero-slide');
     if (slides.length > 0) {
         let current = 0;
         let slideInterval;
 
-        const updateSlide = (index) => {
+        function updateSlide(index) {
             slides.forEach(s => s.classList.remove('active-slide'));
             current = (index + slides.length) % slides.length;
             slides[current].classList.add('active-slide');
-        };
+            
+            const h1 = slides[current].querySelector('h1');
+            if (h1) {
+                h1.classList.remove('animate__animated', 'animate__fadeInUp');
+                void h1.offsetWidth; 
+                h1.classList.add('animate__animated', 'animate__fadeInUp');
+            }
+        }
 
         const nextBtn = document.getElementById('next');
         const prevBtn = document.getElementById('prev');
@@ -97,36 +104,39 @@ document.addEventListener("DOMContentLoaded", function () {
         if (nextBtn) nextBtn.onclick = () => { updateSlide(current + 1); resetTimer(); };
         if (prevBtn) prevBtn.onclick = () => { updateSlide(current - 1); resetTimer(); };
 
-        const startTimer = () => { slideInterval = setInterval(() => updateSlide(current + 1), 5000); };
-        const resetTimer = () => { clearInterval(slideInterval); startTimer(); };
+        function startTimer() { slideInterval = setInterval(() => updateSlide(current + 1), 5000); }
+        function resetTimer() { clearInterval(slideInterval); startTimer(); }
         startTimer();
     }
 
     // --- 4. Counter Animation Logic ---
-    const counters = document.querySelectorAll('.counter');
-    if (counters.length > 0) {
+    const counterElements = document.querySelectorAll('.counter');
+    if (counterElements.length > 0) {
+        const startCounters = () => {
+            counterElements.forEach(counter => {
+                const updateCount = () => {
+                    const target = +counter.getAttribute('data-target');
+                    const count = +counter.innerText;
+                    const inc = target / 200;
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count + inc);
+                        setTimeout(updateCount, 15);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                updateCount();
+            });
+        };
+
         const observer = new IntersectionObserver((entries) => {
             if (entries[0].isIntersecting) {
-                counters.forEach(counter => {
-                    const target = +counter.getAttribute('data-target');
-                    let count = 0;
-                    const speed = target / 100;
-                    const update = () => {
-                        if (count < target) {
-                            count += speed;
-                            counter.innerText = Math.ceil(count);
-                            setTimeout(update, 20);
-                        } else {
-                            counter.innerText = target;
-                        }
-                    };
-                    update();
-                });
+                startCounters();
                 observer.disconnect();
             }
         }, { threshold: 0.5 });
-
-        const counterSection = document.querySelector('.counter').parentElement.parentElement.parentElement;
-        if (counterSection) observer.observe(counterSection);
+        
+        const observedEl = document.querySelector('.counter').closest('section') || document.querySelector('.counter').parentElement;
+        observer.observe(observedEl);
     }
 });

@@ -18,9 +18,7 @@ body {
   padding: 0;
 }
 
-h1,
-h2,
-.nav-font {
+h1, h2, .nav-font {
   font-family: var(--heading-font);
 }
 
@@ -44,10 +42,9 @@ h2,
 /* 4. MOBILE MENU & OVERLAY LOGIC */
 #mobile-menu {
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  transform: translateX(100%); /* Default hidden state */
+  transform: translateX(100%);
 }
 
-/* Yeh class JS trigger karega */
 .mobile-menu-active {
   transform: translateX(0) !important;
 }
@@ -60,6 +57,7 @@ h2,
 .nav-link {
   transition: all 0.3s ease;
 }
+
 #desktop-nav {
   font-family: math;
   font-size: 17px;
@@ -128,7 +126,6 @@ h2,
     height: 100%;
     padding-top: 2rem;
   }
-
   .image-box {
     position: absolute !important;
     inset: 0;
@@ -136,13 +133,11 @@ h2,
     height: 100% !important;
     z-index: -1;
   }
-
   .image-box img {
     border-radius: 0 !important;
     opacity: 0.4;
     filter: brightness(0.6);
   }
-
   .content-box {
     width: 95% !important;
     padding: 1.5rem !important;
@@ -152,65 +147,31 @@ h2,
     border: 1px solid rgba(255, 255, 255, 0.2);
     margin: 0 auto;
   }
-
-  h1 {
-    font-size: clamp(1.8rem, 8vw, 3rem) !important;
-  }
-  p {
-    font-size: 0.95rem !important;
-    text-align: justify !important;
-  }
+  h1 { font-size: clamp(1.8rem, 8vw, 3rem) !important; }
+  p { font-size: 0.95rem !important; text-align: justify !important; }
 }
 
 @media (min-width: 992px) {
-  .image-rotate {
-    transform: rotate(2deg);
-  }
+  .image-rotate { transform: rotate(2deg); }
 }
 
 /* 8. ANIMATIONS */
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* 9. LOGO SLIDER */
 @keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(calc(-250px * 5));
-  }
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-250px * 5)); }
 }
-
 .slider-track {
   display: flex;
   width: calc(250px * 10);
   animation: scroll 30s linear infinite;
 }
-
-.slider-track:hover {
-  animation-play-state: paused;
-}
-
+.slider-track:hover { animation-play-state: paused; }
 .logo-item {
   width: 250px;
   display: flex;
@@ -225,38 +186,20 @@ h2,
   initial-value: 0;
   inherits: false;
 }
-
 @keyframes count-up {
-  from {
-    --num: 0;
-  }
-  to {
-    --num: var(--final);
-  }
+  from { --num: 0; }
+  to { --num: var(--final); }
 }
-
 span[class^="count-"] {
   transition: --num 2s ease-out;
   counter-reset: num var(--num);
   animation: count-up 3s forwards ease-in-out;
 }
-
-span[class^="count-"]::after {
-  content: counter(num);
-}
-
-.count-1 {
-  --final: 150;
-}
-.count-2 {
-  --final: 50;
-}
-.count-3 {
-  --final: 25;
-}
-.count-4 {
-  --final: 12;
-}
+span[class^="count-"]::after { content: counter(num); }
+.count-1 { --final: 150; }
+.count-2 { --final: 50; }
+.count-3 { --final: 25; }
+.count-4 { --final: 12; }
 
 /* 11. UTILITIES */
 .rotate-180 {
