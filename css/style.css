@@ -112,8 +112,8 @@ h2,
   border-bottom: 2px solid #00a859;
 }
 .nav-link.active-parent {
-  color: #3e4095 !important;
-  border-bottom: 2px solid #3e4095;
+  color: #00a859 !important;
+  border-bottom: 2px solid #00a859;
 }
 .dropdown-item.active-item {
   background-color: #f0f9ff;
@@ -122,31 +122,61 @@ h2,
 }
 
 /* Mobile Active Classes */
-.mob-link.active-mob {
-  background-color: #f0fff4;
+/* Custom Active Classes */
+.active-page {
+  color: #00a859 !important;
+  border-bottom: 2px solid #00a859;
+}
+
+.active-parent {
+  color: #3e4095 !important;
+}
+
+.active-item {
+  background-color: #f0f9ff !important;
+  color: #00afef !important;
+  border-left: 4px solid #3e4095;
+}
+
+/* Mobile Side Menu Animation */
+.mobile-menu-active {
+  transform: translateX(0) !important;
+}
+
+/* Dropdown Animation */
+.dropdown-content {
+  display: none;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+}
+
+.group:hover .dropdown-content {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Smooth Rotation */
+.rotate-180 {
+  transform: rotate(180deg);
+}
+
+/* Mobile Active Helpers */
+.active-mob {
+  background-color: #f0fff4 !important;
   color: #00a859 !important;
 }
-.mob-parent-active {
-  color: #3e4095 !important;
-  background-color: #f9fafb;
-}
-.mob-child.active-mob-child {
+
+.active-mob-child {
   border-left-color: #00afef !important;
   color: #00afef !important;
-  font-weight: 700;
+  font-weight: 700 !important;
 }
-#mobile-services-list.flex {
-  animation: fadeIn 0.3s ease-in-out;
-}
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+
+.mob-parent-active {
+  color: #3e4095 !important;
+  background-color: #f9fafb !important;
 }
 
 /* Logo section css */
