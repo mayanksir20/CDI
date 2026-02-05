@@ -1,0 +1,156 @@
+@import url("https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;600&display=swap");
+
+:root {
+  --main-font: "Inter", sans-serif;
+  --heading-font: "Playfair Display", serif;
+}
+
+body {
+  font-family: var(--main-font);
+  background-color: #fbfbfe;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+.nav-font {
+  font-family: var(--heading-font);
+}
+
+/* HERO SLIDER CORE */
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.8s ease-in-out;
+  display: flex;
+  align-items: center;
+}
+
+.hero-slide.active-slide {
+  opacity: 1;
+  visibility: visible;
+  z-index: 10;
+}
+
+/* RESPONSIVE LOGIC (The "992px & Under" Magic) */
+@media (max-width: 991px) {
+  .slide-container {
+    flex-direction: column !important;
+    justify-content: center !important;
+    text-align: center;
+    height: 100%;
+    padding-top: 2rem;
+  }
+
+  .image-box {
+    position: absolute !important;
+    inset: 0;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: -1;
+  }
+
+  .image-box img {
+    border-radius: 0 !important;
+    opacity: 0.4;
+    /* Background image intensity */
+    filter: brightness(0.6);
+  }
+
+  .content-box {
+    width: 95% !important;
+    padding: 1.5rem !important;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  /* Text resize for small devices < 600px */
+  h1 {
+    font-size: clamp(1.8rem, 8vw, 3rem) !important;
+  }
+
+  p {
+    font-size: 0.95rem !important;
+    text-align: justify !important;
+  }
+}
+
+/* Desktop specific rotation */
+@media (min-width: 992px) {
+  .image-rotate {
+    transform: rotate(2deg);
+  }
+}
+
+/* Dropdown custom */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 240px;
+  background: white;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  padding: 10px 0;
+  z-index: 100;
+}
+
+.group:hover .dropdown-content {
+  display: block;
+  animation: fadeInUp 0.3s;
+}
+
+/* menu section css */
+.mobile-menu-active {
+  transform: translateX(0) !important;
+}
+#mobile-services-list.flex {
+  animation: fadeIn 0.3s ease-in-out;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Logo section css */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-250px * 5));
+  } /* Adjust based on logo width */
+}
+
+.slider-track {
+  display: flex;
+  width: calc(250px * 10); /* Double the logos for seamless loop */
+  animation: scroll 30s linear infinite;
+}
+
+.slider-track:hover {
+  animation-play-state: paused; /* Mouse le jane par ruk jayega */
+}
+
+.logo-item {
+  width: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+.navbar li a{
+    font-size: 16px;
+    font-family: sans-serif !important;
+}
