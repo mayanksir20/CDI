@@ -31,9 +31,16 @@ servicesBtn.onclick = () => {
 
 // Navbar & Mobile Menu Logic end
 
-
+// --- Fixed Nvbar Active Link Logic ---
 document.addEventListener("DOMContentLoaded", function () {
-    const currentUrl = window.location.pathname.split("/").pop() || "index.html";
+    // Current Path nikalne ka sahi tarika
+    let currentPath = window.location.pathname;
+
+    // Agar path empty hai ya sirf '/' hai, toh use 'index.html' maan lo
+    let currentUrl = currentPath.split("/").pop();
+    if (currentUrl === "" || currentUrl === "/") {
+        currentUrl = "index.html";
+    }
 
     // --- Desktop Logic ---
     const navLinks = document.querySelectorAll(".nav-link");
@@ -41,13 +48,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const servicesParent = document.getElementById("services-parent");
 
     navLinks.forEach(link => {
-        if (link.getAttribute("href") === currentUrl) {
+        const href = link.getAttribute("href");
+        if (href === currentUrl || (currentUrl === "index.html" && href === "/")) {
             link.classList.add("active-page");
         }
     });
 
     dropdownItems.forEach(item => {
-        if (item.getAttribute("href") === currentUrl) {
+        const href = item.getAttribute("href");
+        if (href === currentUrl) {
             item.classList.add("active-item");
             if (servicesParent) servicesParent.classList.add("active-parent");
         }
@@ -60,25 +69,27 @@ document.addEventListener("DOMContentLoaded", function () {
     const mobServicesList = document.getElementById("mobile-services-list");
 
     mobLinks.forEach(link => {
-        if (link.getAttribute("href") === currentUrl) {
+        const href = link.getAttribute("href");
+        if (href === currentUrl || (currentUrl === "index.html" && href === "/")) {
             link.classList.add("active-mob");
         }
     });
 
     mobChildren.forEach(child => {
-        if (child.getAttribute("href") === currentUrl) {
+        const href = child.getAttribute("href");
+        if (href === currentUrl) {
             child.classList.add("active-mob-child");
-            // Automatically open the mobile dropdown if child is active
+            // Automatically open mobile dropdown if child is active
             if (mobServicesBtn && mobServicesList) {
                 mobServicesBtn.classList.add("mob-parent-active");
                 mobServicesList.classList.remove("hidden");
                 mobServicesList.classList.add("flex");
-                mobServicesBtn.querySelector('i').style.transform = "rotate(180deg)";
+                const icon = mobServicesBtn.querySelector('i');
+                if (icon) icon.style.transform = "rotate(180deg)";
             }
         }
     });
 });
-
 // --- Slider banner Logic ---
 const slides = document.querySelectorAll('.hero-slide');
 let current = 0;
@@ -154,6 +165,3 @@ const observer = new IntersectionObserver((entries) => {
 observer.observe(document.querySelector('.counter').parentElement.parentElement.parentElement);
 
 // Counter Animation Logic end
-
-
-// Counting logic Hospitality Management page
