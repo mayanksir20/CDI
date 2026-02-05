@@ -2,8 +2,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;600&family=Playfair+Display:wght@700&display=swap");
 
 :root {
-  --main-font: "Inter", sans-serif;
-  --heading-font: "Playfair Display", serif;
   --primary-color: #3e4095;
   --secondary-color: #00a859;
   --accent-color: #00afef;
@@ -11,17 +9,10 @@
 
 /* 2. CORE RESET */
 body {
-  font-family: var(--main-font);
   background-color: #fbfbfe;
   overflow-x: hidden;
   margin: 0;
   padding: 0;
-}
-
-h1,
-h2,
-.nav-font {
-  font-family: var(--heading-font);
 }
 
 /* 3. HERO SLIDER LOGIC */
@@ -78,6 +69,9 @@ h2,
   opacity: 0;
   transform: translateY(10px);
 }
+.dropdown-content a {
+  font-size: 15px;
+}
 
 .group:hover .dropdown-content {
   display: block;
@@ -89,12 +83,11 @@ h2,
 /* 6. ACTIVE CLASSES (Desktop & Mobile) */
 .active-page {
   color: var(--secondary-color) !important;
-  border-bottom: 2px solid var(--secondary-color);
+ 
 }
 
 .active-parent {
   color: var(--secondary-color) !important;
-  border-bottom: 2px solid var(--secondary-color);
 }
 
 .active-item {
