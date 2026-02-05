@@ -31,112 +31,80 @@ document.addEventListener("DOMContentLoaded", function () {
         };
     }
 
-    // --- 2. Active Link Logic (Local & Live Fix) ---
-    let currentPath = window.location.pathname;
-    let currentUrl = currentPath.split("/").pop();
-    if (currentUrl === "" || currentUrl === "/") {
-        currentUrl = "index.html";
+    // --- 2. Active Link Logic (Netlify Fix) ---
+    const currentPath = window.location.pathname.toLowerCase();
+    
+    function setActive(links, activeClass, isChild = false) {
+        links.forEach(link => {
+            const href = link.getAttribute("href").toLowerCase();
+            // Netlify "/" aur "index.html" handle karne ke liye
+            const isHome = (currentPath === "/" || currentPath.includes("index")) && (href.includes("index") || href === "/");
+            const isOther = href !== "/" && href !== "#" && currentPath.includes(href.replace(".html", ""));
+
+            if (isHome || isOther) {
+                link.classList.add(activeClass);
+                // Services parent highlight logic
+                if (isChild) {
+                    const parent = document.getElementById("services-parent");
+                    if (parent) parent.classList.add("active-parent");
+                    if (servicesBtn && servicesList) {
+                        servicesBtn.classList.add("mob-parent-active");
+                        servicesList.classList.remove("hidden");
+                        servicesList.classList.add("flex");
+                        const icon = servicesBtn.querySelector('i');
+                        if (icon) icon.classList.add('rotate-180');
+                    }
+                }
+            }
+        });
     }
 
-    // Desktop
-    const navLinks = document.querySelectorAll(".nav-link");
-    const dropdownItems = document.querySelectorAll(".dropdown-item");
-    const servicesParent = document.getElementById("services-parent");
+    setActive(document.querySelectorAll(".nav-link"), "active-page");
+    setActive(document.querySelectorAll(".dropdown-item"), "active-item", true);
+    setActive(document.querySelectorAll(".mob-link"), "active-mob");
+    setActive(document.querySelectorAll(".mob-child"), "active-mob-child", true);
 
-    navLinks.forEach(link => {
-        if (link.getAttribute("href") === currentUrl) {
-            link.classList.add("active-page");
-        }
-    });
-
-    dropdownItems.forEach(item => {
-        if (item.getAttribute("href") === currentUrl) {
-            item.classList.add("active-item");
-            if (servicesParent) servicesParent.classList.add("active-parent");
-        }
-    });
-
-    // Mobile
-    const mobLinks = document.querySelectorAll(".mob-link");
-    const mobChildren = document.querySelectorAll(".mob-child");
-
-    mobLinks.forEach(link => {
-        if (link.getAttribute("href") === currentUrl) {
-            link.classList.add("active-mob");
-        }
-    });
-
-    mobChildren.forEach(child => {
-        if (child.getAttribute("href") === currentUrl) {
-            child.classList.add("active-mob-child");
-            if (servicesBtn && servicesList) {
-                servicesBtn.classList.add("mob-parent-active");
-                servicesList.classList.remove("hidden");
-                servicesList.classList.add("flex");
-                const icon = servicesBtn.querySelector('i');
-                if (icon) icon.classList.add('rotate-180');
-            }
-        }
-    });
-
-    // --- 3. Slider banner Logic ---
+    // --- 3. Slider Logic ---
     const slides = document.querySelectorAll('.hero-slide');
     if (slides.length > 0) {
         let current = 0;
         let slideInterval;
-
-        function updateSlide(index) {
+        const updateSlide = (index) => {
             slides.forEach(s => s.classList.remove('active-slide'));
             current = (index + slides.length) % slides.length;
             slides[current].classList.add('active-slide');
-            
-            const h1 = slides[current].querySelector('h1');
-            if (h1) {
-                h1.classList.remove('animate__animated', 'animate__fadeInUp');
-                void h1.offsetWidth; 
-                h1.classList.add('animate__animated', 'animate__fadeInUp');
-            }
-        }
+        };
+        const startTimer = () => { slideInterval = setInterval(() => updateSlide(current + 1), 5000); };
+        const resetTimer = () => { clearInterval(slideInterval); startTimer(); };
 
-        const nextBtn = document.getElementById('next');
-        const prevBtn = document.getElementById('prev');
-
-        if (nextBtn) nextBtn.onclick = () => { updateSlide(current + 1); resetTimer(); };
-        if (prevBtn) prevBtn.onclick = () => { updateSlide(current - 1); resetTimer(); };
-
-        function startTimer() { slideInterval = setInterval(() => updateSlide(current + 1), 5000); }
-        function resetTimer() { clearInterval(slideInterval); startTimer(); }
+        const nxt = document.getElementById('next');
+        const prv = document.getElementById('prev');
+        if (nxt) nxt.onclick = () => { updateSlide(current+1); resetTimer(); };
+        if (prv) prv.onclick = () => { updateSlide(current-1); resetTimer(); };
         startTimer();
     }
 
-    // --- 4. Counter Animation Logic ---
-    const counterElements = document.querySelectorAll('.counter');
-    if (counterElements.length > 0) {
-        const startCounters = () => {
-            counterElements.forEach(counter => {
-                const updateCount = () => {
-                    const target = +counter.getAttribute('data-target');
-                    const count = +counter.innerText;
-                    const inc = target / 200;
-                    if (count < target) {
-                        counter.innerText = Math.ceil(count + inc);
-                        setTimeout(updateCount, 15);
-                    } else {
-                        counter.innerText = target;
-                    }
-                };
-                updateCount();
-            });
-        };
-
-        const observer = new IntersectionObserver((entries) => {
+    // --- 4. Counter Logic ---
+    const counters = document.querySelectorAll('.counter');
+    if (counters.length > 0) {
+        const obs = new IntersectionObserver((entries) => {
             if (entries[0].isIntersecting) {
-                startCounters();
-                observer.disconnect();
+                counters.forEach(c => {
+                    const target = +c.getAttribute('data-target');
+                    let count = 0;
+                    const update = () => {
+                        const inc = target / 100;
+                        if (count < target) {
+                            count += inc;
+                            c.innerText = Math.ceil(count);
+                            setTimeout(update, 20);
+                        } else { c.innerText = target; }
+                    };
+                    update();
+                });
+                obs.disconnect();
             }
-        }, { threshold: 0.5 });
-        
-        const observedEl = document.querySelector('.counter').closest('section') || document.querySelector('.counter').parentElement;
-        observer.observe(observedEl);
+        });
+        obs.observe(counters[0].closest('section') || counters[0].parentElement);
     }
 });
