@@ -1,14 +1,21 @@
-@import url("https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;600&display=swap");
+/* 1. FONTS & ROOT VARIABLES */
+@import url("https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;600&family=Playfair+Display:wght@700&display=swap");
 
 :root {
   --main-font: "Inter", sans-serif;
   --heading-font: "Playfair Display", serif;
+  --primary-color: #3e4095;
+  --secondary-color: #00a859;
+  --accent-color: #00afef;
 }
 
+/* 2. CORE RESET */
 body {
   font-family: var(--main-font);
   background-color: #fbfbfe;
   overflow-x: hidden;
+  margin: 0;
+  padding: 0;
 }
 
 h1,
@@ -17,7 +24,7 @@ h2,
   font-family: var(--heading-font);
 }
 
-/* HERO SLIDER CORE */
+/* 3. HERO SLIDER LOGIC */
 .hero-slide {
   position: absolute;
   inset: 0;
@@ -34,7 +41,85 @@ h2,
   z-index: 10;
 }
 
-/* RESPONSIVE LOGIC (The "992px & Under" Magic) */
+/* 4. MOBILE MENU & OVERLAY LOGIC */
+#mobile-menu {
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateX(100%); /* Default hidden state */
+}
+
+/* Yeh class JS trigger karega */
+.mobile-menu-active {
+  transform: translateX(0) !important;
+}
+
+#mobile-overlay {
+  transition: opacity 0.3s ease;
+}
+
+/* 5. NAVBAR & DROPDOWN */
+.nav-link {
+  transition: all 0.3s ease;
+}
+#desktop-nav {
+  font-family: math;
+  font-size: 17px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 270px;
+  background: white;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  z-index: 100;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.group:hover .dropdown-content {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+  animation: fadeInUp 0.3s forwards;
+}
+
+/* 6. ACTIVE CLASSES (Desktop & Mobile) */
+.active-page {
+  color: var(--secondary-color) !important;
+  border-bottom: 2px solid var(--secondary-color);
+}
+
+.active-parent {
+  color: var(--secondary-color) !important;
+  border-bottom: 2px solid var(--secondary-color);
+}
+
+.active-item {
+  background-color: #f0f9ff !important;
+  color: var(--accent-color) !important;
+  border-left: 4px solid var(--primary-color);
+}
+
+.active-mob {
+  background-color: #f0fff4 !important;
+  color: var(--secondary-color) !important;
+}
+
+.active-mob-child {
+  border-left-color: var(--accent-color) !important;
+  color: var(--accent-color) !important;
+  font-weight: 700 !important;
+}
+
+.mob-parent-active {
+  color: var(--primary-color) !important;
+  background-color: #f9fafb !important;
+}
+
+/* 7. RESPONSIVE DESIGN (991px & Under) */
 @media (max-width: 991px) {
   .slide-container {
     flex-direction: column !important;
@@ -55,7 +140,6 @@ h2,
   .image-box img {
     border-radius: 0 !important;
     opacity: 0.4;
-    /* Background image intensity */
     filter: brightness(0.6);
   }
 
@@ -66,139 +150,65 @@ h2,
     backdrop-filter: blur(8px);
     border-radius: 24px;
     border: 1px solid rgba(255, 255, 255, 0.2);
+    margin: 0 auto;
   }
 
-  /* Text resize for small devices < 600px */
   h1 {
     font-size: clamp(1.8rem, 8vw, 3rem) !important;
   }
-
   p {
     font-size: 0.95rem !important;
     text-align: justify !important;
   }
 }
 
-/* Desktop specific rotation */
 @media (min-width: 992px) {
   .image-rotate {
     transform: rotate(2deg);
   }
 }
 
-/* Dropdown custom */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  min-width: 270px;
-  background: white;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  border-radius: 12px;
-  /* padding: 10px 0; */
-  z-index: 100;
+/* 8. ANIMATIONS */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.group:hover .dropdown-content {
-  display: block;
-  animation: fadeInUp 0.3s;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* menu section css */
-/* Desktop Active Classes */
-.nav-link.active-page {
-  color: #00a859 !important;
-  border-bottom: 2px solid #00a859;
-}
-.nav-link.active-parent {
-  color: #00a859 !important;
-  border-bottom: 2px solid #00a859;
-}
-.dropdown-item.active-item {
-  background-color: #f0f9ff;
-  color: #00afef !important;
-  border-left: 4px solid #3e4095;
-}
-
-/* Mobile Active Classes */
-/* Custom Active Classes */
-.active-page {
-  color: #00a859 !important;
-  border-bottom: 2px solid #00a859;
-}
-
-.active-parent {
-  color: #3e4095 !important;
-}
-
-.active-item {
-  background-color: #f0f9ff !important;
-  color: #00afef !important;
-  border-left: 4px solid #3e4095;
-}
-
-/* Mobile Side Menu Animation */
-.mobile-menu-active {
-  transform: translateX(0) !important;
-}
-
-/* Dropdown Animation */
-.dropdown-content {
-  display: none;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: all 0.3s ease;
-}
-
-.group:hover .dropdown-content {
-  display: block;
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Smooth Rotation */
-.rotate-180 {
-  transform: rotate(180deg);
-}
-
-/* Mobile Active Helpers */
-.active-mob {
-  background-color: #f0fff4 !important;
-  color: #00a859 !important;
-}
-
-.active-mob-child {
-  border-left-color: #00afef !important;
-  color: #00afef !important;
-  font-weight: 700 !important;
-}
-
-.mob-parent-active {
-  color: #3e4095 !important;
-  background-color: #f9fafb !important;
-}
-
-/* Logo section css */
+/* 9. LOGO SLIDER */
 @keyframes scroll {
   0% {
     transform: translateX(0);
   }
   100% {
     transform: translateX(calc(-250px * 5));
-  } /* Adjust based on logo width */
+  }
 }
 
 .slider-track {
   display: flex;
-  width: calc(250px * 10); /* Double the logos for seamless loop */
+  width: calc(250px * 10);
   animation: scroll 30s linear infinite;
 }
 
 .slider-track:hover {
-  animation-play-state: paused; /* Mouse le jane par ruk jayega */
-}
-.hero-section {
+  animation-play-state: paused;
 }
 
 .logo-item {
@@ -208,19 +218,14 @@ h2,
   align-items: center;
   flex-shrink: 0;
 }
-.navbar li a {
-  font-size: 15px;
-  font-family: sans-serif !important;
-}
 
-/* CSS Properties for Counting (Modern Browsers) */
+/* 10. COUNTER ANIMATION */
 @property --num {
   syntax: "<integer>";
   initial-value: 0;
   inherits: false;
 }
 
-/* Keyframes for animation */
 @keyframes count-up {
   from {
     --num: 0;
@@ -230,7 +235,6 @@ h2,
   }
 }
 
-/* Common style for counters */
 span[class^="count-"] {
   transition: --num 2s ease-out;
   counter-reset: num var(--num);
@@ -241,7 +245,6 @@ span[class^="count-"]::after {
   content: counter(num);
 }
 
-/* Individual Target Values */
 .count-1 {
   --final: 150;
 }
@@ -253,4 +256,10 @@ span[class^="count-"]::after {
 }
 .count-4 {
   --final: 12;
+}
+
+/* 11. UTILITIES */
+.rotate-180 {
+  transform: rotate(180deg);
+  transition: transform 0.3s ease;
 }
