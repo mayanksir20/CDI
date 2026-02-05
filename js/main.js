@@ -32,7 +32,7 @@ servicesBtn.onclick = () => {
 // Navbar & Mobile Menu Logic end
 
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const currentUrl = window.location.pathname.split("/").pop() || "index.html";
 
     // --- Desktop Logic ---
@@ -154,3 +154,6 @@ const observer = new IntersectionObserver((entries) => {
 observer.observe(document.querySelector('.counter').parentElement.parentElement.parentElement);
 
 // Counter Animation Logic end
+
+
+// Counting logic Hospitality Management page

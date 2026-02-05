@@ -22,42 +22,43 @@
                 </span>
             </div>
 
-            <ul class="hidden lg:flex items-center gap-8 font-semibold text-gray-700 nav-font">
-                <li><a href="index.html" class="text-[#00a859] border-b-2 border-[#00a859] transition-all">Home</a></li>
+            <ul id="desktop-nav" class="hidden lg:flex items-center gap-8 font-semibold text-gray-700 nav-font">
+                <li><a href="index.html" class="nav-link transition-all">Home</a></li>
                 <li class="relative group">
-                    <a href="#" class="hover:text-[#00afef] transition flex items-center gap-1 cursor-pointer">
+                    <a href="#" id="services-parent"
+                        class="nav-link hover:text-[#00afef] transition flex items-center gap-1 cursor-pointer">
                         Services <i class="fa-solid fa-chevron-down text-[10px]"></i>
                     </a>
                     <div class="dropdown-content">
-                        <a href="#"
-                            class="flex items-center gap-3 px-5 py-3 hover:bg-[#f0f9ff] hover:text-[#00afef] transition">
+                        <a href="hospitality-management.html"
+                            class="dropdown-item flex items-center gap-3 px-5 py-3 hover:bg-[#f0f9ff] hover:text-[#00afef] transition">
                             <i class="fa-solid fa-key text-[#3e4095]"></i> Hospitality Management
                         </a>
-                        <a href="#"
-                            class="flex items-center gap-3 px-5 py-3 hover:bg-[#f0f9ff] hover:text-[#00afef] transition">
+                        <a href="eco-resorts.html"
+                            class="dropdown-item flex items-center gap-3 px-5 py-3 hover:bg-[#f0f9ff] hover:text-[#00afef] transition">
                             <i class="fa-solid fa-house-circle-check text-[#3e4095]"></i> Eco-friendly Resorts
                         </a>
-                        <a href="#"
-                            class="flex items-center gap-3 px-5 py-3 hover:bg-[#f0f9ff] hover:text-[#00afef] transition">
+                        <a href="canteen-dhaba.html"
+                            class="dropdown-item flex items-center gap-3 px-5 py-3 hover:bg-[#f0f9ff] hover:text-[#00afef] transition">
                             <i class="fa-solid fa-handshake text-[#3e4095]"></i> Canteen & 3-Star Dhaba's
                         </a>
                         <hr />
-                        <a href="#"
-                            class="flex items-center gap-3 px-5 py-3 hover:bg-[#f0f9ff] hover:text-[#00afef] transition">
+                        <a href="methodology.html"
+                            class="dropdown-item flex items-center gap-3 px-5 py-3 hover:bg-[#f0f9ff] hover:text-[#00afef] transition">
                             <i class="fa-solid fa-chart-pie text-[#3e4095]"></i> Methodology
                         </a>
-                        <a href="#"
-                            class="flex items-center gap-3 px-5 py-3 hover:bg-[#f0f9ff] hover:text-[#00afef] transition">
+                        <a href="partnership.html"
+                            class="dropdown-item flex items-center gap-3 px-5 py-3 hover:bg-[#f0f9ff] hover:text-[#00afef] transition">
                             <i class="fa-solid fa-tools text-[#3e4095]"></i> Our Partnership & Networking
                         </a>
-                        <a href="#"
-                            class="flex items-center gap-3 px-5 py-3 hover:bg-[#f0f9ff] hover:text-[#00afef] transition">
+                        <a href="impact.html"
+                            class="dropdown-item flex items-center gap-3 px-5 py-3 hover:bg-[#f0f9ff] hover:text-[#00afef] transition">
                             <i class="fa-solid fa-tools text-[#3e4095]"></i> Impact & Outcomes
                         </a>
                     </div>
                 </li>
-                <li><a href="#" class="hover:text-[#00afef] transition">Listings</a></li>
-                <li><a href="#" class="hover:text-[#00afef] transition">About Us</a></li>
+                <li><a href="listings.html" class="nav-link hover:text-[#00afef] transition">Listings</a></li>
+                <li><a href="about.html" class="nav-link hover:text-[#00afef] transition">About Us</a></li>
             </ul>
 
             <button id="menu-open" class="lg:hidden text-2xl text-[#3e4095] focus:outline-none">
@@ -66,7 +67,7 @@
         </div>
     </nav>
 
-    <!-- Mobile Menu -->
+    <!-- Mobile Menu & Overlay -->
     <div id="mobile-overlay" class="fixed inset-0 bg-black/50 z-[190] hidden transition-opacity"></div>
     <div id="mobile-menu"
         class="fixed top-0 right-0 h-full w-[300px] bg-white z-[200] shadow-2xl transition-transform translate-x-full p-6 overflow-y-auto">
@@ -76,8 +77,9 @@
         </div>
 
         <ul class="flex flex-col gap-2 font-bold text-lg text-gray-800">
-            <li><a href="#" class="block py-3 px-4 rounded-xl bg-green-50 text-[#00a859]">Home</a></li>
-            <li><a href="#" class="block py-3 px-4 rounded-xl hover:bg-gray-50 transition hover:text-[#3e4095]">Our
+            <li><a href="index.html" class="mob-link block py-3 px-4 rounded-xl">Home</a></li>
+            <li><a href="listings.html"
+                    class="mob-link block py-3 px-4 rounded-xl hover:bg-gray-50 transition hover:text-[#3e4095]">Our
                     Listings</a></li>
 
             <li class="relative">
@@ -88,44 +90,36 @@
                 </button>
 
                 <div id="mobile-services-list" class="hidden flex-col gap-1 pl-6 mt-2 overflow-hidden transition-all">
-
-                    <a href="#"
-                        class="flex items-center gap-3 py-2 text-base font-medium text-gray-600 border-l-2 border-gray-100 pl-4 hover:border-[#00afef] hover:text-[#00afef]">
+                    <a href="hospitality-management.html"
+                        class="mob-child flex items-center gap-3 py-2 text-base font-medium text-gray-600 border-l-2 border-gray-100 pl-4 hover:border-[#00afef] hover:text-[#00afef]">
                         <i class="fa-solid fa-key text-[#3e4095]"></i> Hospitality Management
                     </a>
-
-                    <a href="#"
-                        class="flex items-center gap-3 py-2 text-base font-medium text-gray-600 border-l-2 border-gray-100 pl-4 hover:border-[#00afef] hover:text-[#00afef]">
+                    <a href="eco-resorts.html"
+                        class="mob-child flex items-center gap-3 py-2 text-base font-medium text-gray-600 border-l-2 border-gray-100 pl-4 hover:border-[#00afef] hover:text-[#00afef]">
                         <i class="fa-solid fa-house-circle-check text-[#3e4095]"></i> Eco-friendly Resorts
                     </a>
-
-                    <a href="#"
-                        class="flex items-center gap-3 py-2 text-base font-medium text-gray-600 border-l-2 border-gray-100 pl-4 hover:border-[#00afef] hover:text-[#00afef]">
+                    <a href="canteen-dhaba.html"
+                        class="mob-child flex items-center gap-3 py-2 text-base font-medium text-gray-600 border-l-2 border-gray-100 pl-4 hover:border-[#00afef] hover:text-[#00afef]">
                         <i class="fa-solid fa-handshake text-[#3e4095]"></i> Canteen & 3-Star Dhaba's
                     </a>
-
                     <div class="my-2 border-t border-gray-200"></div>
-
-                    <a href="#"
-                        class="flex items-center gap-3 py-2 text-base font-medium text-gray-600 border-l-2 border-gray-100 pl-4 hover:border-[#00afef] hover:text-[#00afef]">
+                    <a href="methodology.html"
+                        class="mob-child flex items-center gap-3 py-2 text-base font-medium text-gray-600 border-l-2 border-gray-100 pl-4 hover:border-[#00afef] hover:text-[#00afef]">
                         <i class="fa-solid fa-chart-pie text-[#3e4095]"></i> Methodology
                     </a>
-
-                    <a href="#"
-                        class="flex items-center gap-3 py-2 text-base font-medium text-gray-600 border-l-2 border-gray-100 pl-4 hover:border-[#00afef] hover:text-[#00afef]">
+                    <a href="partnership.html"
+                        class="mob-child flex items-center gap-3 py-2 text-base font-medium text-gray-600 border-l-2 border-gray-100 pl-4 hover:border-[#00afef] hover:text-[#00afef]">
                         <i class="fa-solid fa-network-wired text-[#3e4095]"></i> Partnership & Networking
                     </a>
-
-                    <a href="#"
-                        class="flex items-center gap-3 py-2 text-base font-medium text-gray-600 border-l-2 border-gray-100 pl-4 hover:border-[#00afef] hover:text-[#00afef]">
+                    <a href="impact.html"
+                        class="mob-child flex items-center gap-3 py-2 text-base font-medium text-gray-600 border-l-2 border-gray-100 pl-4 hover:border-[#00afef] hover:text-[#00afef]">
                         <i class="fa-solid fa-chart-line text-[#3e4095]"></i> Impact & Outcomes
                     </a>
-
                 </div>
             </li>
 
-
-            <li><a href="#" class="block py-3 px-4 rounded-xl hover:bg-gray-50 transition hover:text-[#3e4095]">About
+            <li><a href="about.html"
+                    class="mob-link block py-3 px-4 rounded-xl hover:bg-gray-50 transition hover:text-[#3e4095]">About
                     Us</a></li>
         </ul>
 
@@ -138,25 +132,30 @@
     </div>
     <!-- Navbar End  -->
 
-    <!-- Hero-section -->
+    <!-- Home Banner Start -->
     <section class="mt-[100px] py-6 border-b border-gray-100 bg-[#3e4095]">
         <div class="container mx-auto px-6">
             <div class="flex flex-col md:flex-row items-center justify-between gap-4">
                 <div class="flex items-center gap-3">
                     <div class="w-1 h-8 bg-[#00a859]"></div>
                     <h1 class="text-xl md:text-2xl font-black text-white uppercase tracking-tight">
-                        Hospitality Management
+                        Eco-friendly Resorts
                     </h1>
                 </div>
                 <nav class="flex items-center space-x-2 text-xs font-bold uppercase tracking-wider">
                     <a href="index.html" class="text-gray-400 hover:text-[#00a859] transition-all">Home</a>
                     <span class="text-gray-300"><i class="fa-solid fa-chevron-right text-[10px]"></i></span>
-                    <span class="text-white">Hospitality Management</span>
+                    <a href="#" class="text-gray-400 hover:text-[#00a859] transition-all">Services</a>
+                    <span class="text-[#00a859]"><i class="fa-solid fa-chevron-right text-[10px]"></i></span>
+                    <span class="text-white">Eco-friendly Resorts</span>
                 </nav>
             </div>
         </div>
     </section>
-    <!-- Hero-section End -->
+    <!-- Home Banner End -->
+
+
+
 
 
     <!-- Footer Start -->
@@ -184,9 +183,10 @@
             <hr class="border-white/10 mb-16">
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-
                 <div>
-                    <h4 class="text-2xl font-black mb-6 text-[#00afef]">CDI <span class="text-white">India</span></h4>
+                    <h4 class="text-2xl font-black mb-4 text-[#00afef]"><img src="image/CDI LOGO.png" alt="Logo"
+                            class="w-24 grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition duration-500">
+                    </h4>
                     <p class="text-blue-100 text-sm leading-relaxed mb-6">
                         Association of Hospitality & Tourism Industries. Redefining sustainability through professional
                         management and skill development.

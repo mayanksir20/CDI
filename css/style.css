@@ -107,14 +107,34 @@ h2,
 
 /* menu section css */
 /* Desktop Active Classes */
-    .nav-link.active-page { color: #00a859 !important; border-bottom: 2px solid #00a859; }
-    .nav-link.active-parent { color: #3e4095 !important; border-bottom: 2px solid #3e4095; }
-    .dropdown-item.active-item { background-color: #f0f9ff; color: #00afef !important; border-left: 4px solid #3e4095; }
+.nav-link.active-page {
+  color: #00a859 !important;
+  border-bottom: 2px solid #00a859;
+}
+.nav-link.active-parent {
+  color: #3e4095 !important;
+  border-bottom: 2px solid #3e4095;
+}
+.dropdown-item.active-item {
+  background-color: #f0f9ff;
+  color: #00afef !important;
+  border-left: 4px solid #3e4095;
+}
 
-    /* Mobile Active Classes */
-    .mob-link.active-mob { background-color: #f0fff4; color: #00a859 !important; }
-    .mob-parent-active { color: #3e4095 !important; background-color: #f9fafb; }
-    .mob-child.active-mob-child { border-left-color: #00afef !important; color: #00afef !important; font-weight: 700; }
+/* Mobile Active Classes */
+.mob-link.active-mob {
+  background-color: #f0fff4;
+  color: #00a859 !important;
+}
+.mob-parent-active {
+  color: #3e4095 !important;
+  background-color: #f9fafb;
+}
+.mob-child.active-mob-child {
+  border-left-color: #00afef !important;
+  color: #00afef !important;
+  font-weight: 700;
+}
 #mobile-services-list.flex {
   animation: fadeIn 0.3s ease-in-out;
 }
@@ -159,6 +179,48 @@ h2,
   flex-shrink: 0;
 }
 .navbar li a {
-  font-size: 16px;
+  font-size: 15px;
   font-family: sans-serif !important;
+}
+
+/* CSS Properties for Counting (Modern Browsers) */
+@property --num {
+  syntax: "<integer>";
+  initial-value: 0;
+  inherits: false;
+}
+
+/* Keyframes for animation */
+@keyframes count-up {
+  from {
+    --num: 0;
+  }
+  to {
+    --num: var(--final);
+  }
+}
+
+/* Common style for counters */
+span[class^="count-"] {
+  transition: --num 2s ease-out;
+  counter-reset: num var(--num);
+  animation: count-up 3s forwards ease-in-out;
+}
+
+span[class^="count-"]::after {
+  content: counter(num);
+}
+
+/* Individual Target Values */
+.count-1 {
+  --final: 150;
+}
+.count-2 {
+  --final: 50;
+}
+.count-3 {
+  --final: 25;
+}
+.count-4 {
+  --final: 12;
 }
