@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Rose Day Surprise! 🌹</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @keyframes float-up {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
+        }
+        .falling-element {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1;
+            animation: float-up linear forwards;
+        }
+        body {
+            background: #000;
+            background: radial-gradient(circle at center, #300101 0%, #000 100%);
+            touch-action: manipulation;
+        }
+        .btn-shadow {
+            box-shadow: 0 0 20px rgba(220, 38, 38, 0.5);
+        }
+        .glass-ui {
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="text-white flex items-center justify-center min-h-screen overflow-hidden p-4">
+
+    <div id="animation-layer" class="fixed inset-0 pointer-events-none"></div>
+
+    <main class="relative z-10 w-full max-w-md">
+        
+        <div id="question-box" class="text-center animate-in fade-in duration-1000">
+            <div class="mb-6 inline-block">
+                <div class="relative">
+                    <i class="fa-solid fa-rose text-7xl md:text-8xl text-red-600 animate-bounce drop-shadow-[0_0_20px_rgba(255,0,0,0.8)]"></i>
+                    <span id="funny-tag" class="absolute -top-4 -right-12 bg-white text-red-600 text-[10px] font-bold px-2 py-1 rounded-full shadow-lg opacity-0 transition-opacity">Pakad lo! 🏃‍♀️</span>
+                </div>
+            </div>
+
+            <h1 class="text-4xl md:text-5xl font-black mb-4 font-serif">Happy <span class="text-red-500">Rose Day!</span></h1>
+            <p class="text-gray-400 mb-10 text-lg italic">"Duniya ke saare Gulaab ek taraf, <br> aur meri Wife ek taraf!" 🌹</p>
+
+            <h2 class="text-xl font-bold mb-8 text-pink-200">Will You Be My Valentine? ❤️</h2>
+
+            <div id="button-area" class="flex flex-row gap-4 justify-center items-center h-32 relative">
+                <button id="yesBtn" class="bg-red-600 hover:bg-red-500 text-white font-black px-10 py-4 rounded-2xl text-xl btn-shadow transition-all active:scale-90 z-20">
+                    YES! 🌹
+                </button>
+
+                <button id="noBtn" class="bg-white/10 text-white border border-white/20 font-bold px-8 py-4 rounded-2xl text-lg transition-all duration-100 z-30">
+                    No 🥀
+                </button>
+            </div>
+        </div>
+
+        <div id="celebration-box" class="hidden opacity-0 transform translate-y-10 transition-all duration-700">
+            <div class="glass-ui p-8 md:p-12 rounded-[3rem] text-center relative">
+                <div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-red-600 w-20 h-20 rounded-full flex items-center justify-center border-4 border-black">
+                    <i class="fa-solid fa-heart text-white text-3xl animate-ping"></i>
+                </div>
+
+                <h2 class="text-3xl font-black mb-6 mt-6">I Knew It! 😘</h2>
+                
+                <p class="text-gray-200 text-lg leading-relaxed mb-6 font-medium italic">
+                    "Phoolon se acchi meri wife hai, <br>
+                    Tumhare bina adhuri meri life hai!" 
+                </p>
+
+                <p class="text-gray-400 text-sm leading-relaxed mb-8">
+                    Ab mana hi liya hai toh ek chocolate bhi khila dena shaam ko! 🍫😜
+                </p>
+
+                <div class="pt-6 border-t border-white/10">
+                    <span class="text-red-500 font-bold tracking-[0.2em] uppercase text-xs">Love You Hamesha ❤️</span>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        // 1. ROSE & BALLOON ANIMATION
+        const animLayer = document.getElementById('animation-layer');
+        const elements = ['fa-rose', 'fa-heart', 'fa-leaf'];
+        const colors = ['#ff4d4d', '#ff8080', '#e11d48', '#22c55e'];
+
+        function createFloater() {
+            const floater = document.createElement('i');
+            const type = elements[Math.floor(Math.random() * elements.length)];
+            floater.className = `fa-solid ${type} falling-element`;
+            
+            floater.style.left = Math.random() * 100 + 'vw';
+            floater.style.fontSize = Math.random() * 20 + 15 + 'px';
+            floater.style.color = colors[Math.floor(Math.random() * colors.length)];
+            floater.style.animationDuration = Math.random() * 3 + 4 + 's';
+            
+            animLayer.appendChild(floater);
+            setTimeout(() => floater.remove(), 7000);
+        }
+
+        setInterval(createFloater, 400);
+
+        // 2. MOBILE-FRIENDLY NO BUTTON LOGIC
+        const noBtn = document.getElementById('noBtn');
+        const funnyTag = document.getElementById('funny-tag');
+        const lines = ["Pakad ke dikhao! 😜", "Nope! 😂", "Try again! 🙊", "Bhagna mana hai!", "Arey idhar! 🏃‍♀️"];
+
+        const moveNoButton = (e) => {
+            // Screen safe area
+            const padding = 60;
+            const maxX = window.innerWidth - noBtn.offsetWidth - padding;
+            const maxY = window.innerHeight - noBtn.offsetHeight - padding;
+            
+            const randomX = Math.max(padding, Math.floor(Math.random() * maxX));
+            const randomY = Math.max(padding, Math.floor(Math.random() * maxY));
+            
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+
+            // Show funny tag
+            funnyTag.innerText = lines[Math.floor(Math.random() * lines.length)];
+            funnyTag.style.opacity = '1';
+            setTimeout(() => funnyTag.style.opacity = '0', 800);
+        };
+
+        noBtn.addEventListener('mouseover', moveNoButton);
+        noBtn.addEventListener('touchstart', (e) => {
+            e.preventDefault(); // Stop mobile from clicking
+            moveNoButton();
+        });
+
+        // 3. SUCCESS TRANSITION
+        const yesBtn = document.getElementById('yesBtn');
+        const qBox = document.getElementById('question-box');
+        const cBox = document.getElementById('celebration-box');
+
+        yesBtn.addEventListener('click', () => {
+            // Fast Rain of Roses
+            setInterval(createFloater, 50);
+            
+            qBox.classList.add('opacity-0', 'scale-90');
+            setTimeout(() => {
+                qBox.classList.add('hidden');
+                cBox.classList.remove('hidden');
+                setTimeout(() => {
+                    cBox.classList.add('opacity-100', 'translate-y-0');
+                }, 100);
+            }, 500);
+        });
+    </script>
+</body>
+</html>
