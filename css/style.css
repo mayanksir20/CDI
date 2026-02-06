@@ -6,6 +6,13 @@
   --secondary-color: #00a859;
   --accent-color: #00afef;
 }
+p {
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  text-align: justify !important;
+  color: #333333;
+}
 
 /* 2. CORE RESET */
 body {
@@ -83,7 +90,6 @@ body {
 /* 6. ACTIVE CLASSES (Desktop & Mobile) */
 .active-page {
   color: var(--secondary-color) !important;
- 
 }
 
 .active-parent {

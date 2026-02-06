@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // --- 2. Active Link Logic (Netlify Fix) ---
     const currentPath = window.location.pathname.toLowerCase();
-    
+
     function setActive(links, activeClass, isChild = false) {
         links.forEach(link => {
             const href = link.getAttribute("href").toLowerCase();
@@ -79,8 +79,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const nxt = document.getElementById('next');
         const prv = document.getElementById('prev');
-        if (nxt) nxt.onclick = () => { updateSlide(current+1); resetTimer(); };
-        if (prv) prv.onclick = () => { updateSlide(current-1); resetTimer(); };
+        if (nxt) nxt.onclick = () => { updateSlide(current + 1); resetTimer(); };
+        if (prv) prv.onclick = () => { updateSlide(current - 1); resetTimer(); };
         startTimer();
     }
 
@@ -108,3 +108,37 @@ document.addEventListener("DOMContentLoaded", function () {
         obs.observe(counters[0].closest('section') || counters[0].parentElement);
     }
 });
+
+
+
+    // --- 4. Counter impact Logic ---
+const counters = document.querySelectorAll('.counter');
+    const speed = 200;
+
+    const startCounters = () => {
+        counters.forEach(counter => {
+            const updateCount = () => {
+                const target = +counter.getAttribute('data-target');
+                const count = +counter.innerText;
+                const inc = target / speed;
+
+                if (count < target) {
+                    counter.innerText = Math.ceil(count + inc);
+                    setTimeout(updateCount, 15);
+                } else {
+                    counter.innerText = target;
+                }
+            };
+            updateCount();
+        });
+    };
+
+    // Trigger counters when section is visible
+    const observer = new IntersectionObserver((entries) => {
+        if(entries[0].isIntersecting) {
+            startCounters();
+            observer.unobserve(entries[0].target);
+        }
+    }, { threshold: 0.5 });
+
+    observer.observe(document.querySelector('#achievements-section'));

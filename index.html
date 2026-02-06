@@ -43,7 +43,15 @@
                             class="dropdown-item flex items-center gap-3 px-5 py-3 hover:bg-[#f0f9ff] hover:text-[#00afef] transition">
                             <i class="fa-solid fa-utensils text-[#3e4095]"></i> Canteen & 3-Star Dhaba's
                         </a>
-                        <hr class="border-gray-100" />
+                    </div>
+                </li>
+
+                <li class="relative group">
+                    <a href="#" id="strategy-parent"
+                        class="nav-link hover:text-[#00afef] transition flex items-center gap-1 cursor-pointer">
+                        Strategy <i class="fa-solid fa-chevron-down text-[10px]"></i>
+                    </a>
+                    <div class="dropdown-content">
                         <a href="methodology.html"
                             class="dropdown-item flex items-center gap-3 px-5 py-3 hover:bg-[#f0f9ff] hover:text-[#00afef] transition">
                             <i class="fa-solid fa-layer-group text-[#3e4095]"></i> Methodology
@@ -80,6 +88,7 @@
             <li><a href="about.html"
                     class="mob-link block py-3 px-4 rounded-xl hover:bg-gray-50 transition hover:text-[#3e4095]">About
                     Us</a></li>
+
             <li class="relative">
                 <button id="mobile-services-btn"
                     class="w-full flex items-center justify-between py-3 px-4 rounded-xl hover:bg-gray-50 transition hover:text-[#3e4095]">
@@ -88,27 +97,40 @@
                 <div id="mobile-services-list" class="hidden flex-col gap-1 pl-6 mt-2 overflow-hidden transition-all">
                     <a href="hospitality-management.html"
                         class="mob-child flex items-center gap-3 py-2 text-base font-medium text-gray-600 border-l-2 border-gray-100 pl-4 hover:border-[#00afef] hover:text-[#00afef]">
-                        <i class="fa-solid fa-hotel text-sm w-5"></i> Hospitality Management
+                        <i class="fa-solid fa-hotel text-sm w-5 text-[#3e4095]"></i> Hospitality Management
                     </a>
                     <a href="eco-resorts.html"
                         class="mob-child flex items-center gap-3 py-2 text-base font-medium text-gray-600 border-l-2 border-gray-100 pl-4 hover:border-[#00afef] hover:text-[#00afef]">
-                        <i class="fa-solid fa-leaf text-sm w-5"></i> Eco-friendly Resorts
+                        <i class="fa-solid fa-leaf text-sm w-5 text-[#3e4095]"></i> Eco-friendly Resorts
                     </a>
                     <a href="canteen-dhaba.html"
                         class="mob-child flex items-center gap-3 py-2 text-base font-medium text-gray-600 border-l-2 border-gray-100 pl-4 hover:border-[#00afef] hover:text-[#00afef]">
-                        <i class="fa-solid fa-utensils text-sm w-5"></i> Canteen & Dhaba's
-                    </a>
-                    <div class="my-2 border-t border-gray-100"></div>
-                    <a href="methodology.html"
-                        class="mob-child flex items-center gap-3 py-2 text-base font-medium text-gray-600 border-l-2 border-gray-100 pl-4 hover:border-[#00afef] hover:text-[#00afef]">
-                        <i class="fa-solid fa-layer-group text-sm w-5"></i> Methodology
-                    </a>
-                    <a href="partnership.html"
-                        class="mob-child flex items-center gap-3 py-2 text-base font-medium text-gray-600 border-l-2 border-gray-100 pl-4 hover:border-[#00afef] hover:text-[#00afef]">
-                        <i class="fa-solid fa-handshake-angle text-sm w-5"></i> Partnership
+                        <i class="fa-solid fa-utensils text-sm w-5 text-[#3e4095]"></i> Canteen & Dhaba's
                     </a>
                 </div>
             </li>
+
+            <li class="relative">
+                <button id="mobile-strategy-btn"
+                    class="w-full flex items-center justify-between py-3 px-4 rounded-xl hover:bg-gray-50 transition hover:text-[#3e4095]">
+                    Strategy <i class="fa-solid fa-chevron-down text-sm transition-transform duration-300"></i>
+                </button>
+                <div id="mobile-strategy-list" class="hidden flex-col gap-1 pl-6 mt-2 overflow-hidden transition-all">
+                    <a href="methodology.html"
+                        class="mob-child flex items-center gap-3 py-2 text-base font-medium text-gray-600 border-l-2 border-gray-100 pl-4 hover:border-[#00afef] hover:text-[#00afef]">
+                        <i class="fa-solid fa-layer-group text-sm w-5 text-[#3e4095]"></i> Methodology
+                    </a>
+                    <a href="partnership.html"
+                        class="mob-child flex items-center gap-3 py-2 text-base font-medium text-gray-600 border-l-2 border-gray-100 pl-4 hover:border-[#00afef] hover:text-[#00afef]">
+                        <i class="fa-solid fa-handshake-angle text-sm w-5 text-[#3e4095]"></i> Partnership & Networking
+                    </a>
+                    <a href="impact.html"
+                        class="mob-child flex items-center gap-3 py-2 text-base font-medium text-gray-600 border-l-2 border-gray-100 pl-4 hover:border-[#00afef] hover:text-[#00afef]">
+                        <i class="fa-solid fa-chart-line text-sm w-5 text-[#3e4095]"></i> Impact & Outcomes
+                    </a>
+                </div>
+            </li>
+
             <li><a href="contact.html" class="mob-link block py-3 px-4 rounded-xl">Contact</a></li>
         </ul>
 
@@ -998,8 +1020,8 @@
                 </div>
             </div>
 
-            <div class="mt-20 pt-8 border-t border-white/5 text-center text-blue-200 text-xs">
-                <p>&copy; 2026 Association of Hospitality & Tourism Industries (CDI). All Rights Reserved.</p>
+             <div class="mt-20 pt-8 border-t border-white/5 text-center">
+                <p class="text-white text-xs text-center">&copy; 2026 Association of Hospitality & Tourism Industries (CDI). All Rights Reserved.</p>
             </div>
         </div>
     </footer>
