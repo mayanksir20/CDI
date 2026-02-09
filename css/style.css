@@ -114,7 +114,7 @@ body {
 }
 
 .mob-parent-active {
-  color: var(--primary-color) !important;
+  color: var(--secondary-color) !important;
   background-color: #f9fafb !important;
 }
 
